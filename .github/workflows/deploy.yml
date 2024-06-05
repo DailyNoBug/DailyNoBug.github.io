@@ -10,7 +10,7 @@ env:
   GIT_EMAIL: 2790099263@qq.com
   THEME_REPO: sanonz/hexo-theme-concise
   THEME_BRANCH: master
-  DEPLOY_REPO: DailyNoBug/Collections
+  DEPLOY_REPO: DailyNoBug/DailyNoBug.github.io
   DEPLOY_BRANCH: gh-pages
 
 jobs:
