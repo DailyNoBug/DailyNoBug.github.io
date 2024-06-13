@@ -8,7 +8,7 @@ on:
 env:
   GIT_USER: DailyNoBug
   GIT_EMAIL: 2790099263@qq.com
-  THEME_REPO: sanonz/hexo-theme-concise
+  THEME_REPO: yscoder/hexo-theme-indigo
   THEME_BRANCH: master
   DEPLOY_REPO: DailyNoBug/DailyNoBug.github.io
   DEPLOY_BRANCH: gh-pages
