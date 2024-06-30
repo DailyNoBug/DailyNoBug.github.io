@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>open-project | SCBLOG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="开源项目收集本文档收集一些有意思的开源项目： linenoiselinenoise 是一个轻量级、跨平台的 C 语言库，用于命令行输入的处理。该项目最初是由 Salvatore Sanfilippo (antirez) 创建的，以提供一个简单、高效的替代方案，取代 GNU Readline 和 libedit 库。linenoise 的设计目标是保持最小化的代码库，同时提供足够的功能以满足大多数命">
+<meta property="og:type" content="article">
+<meta property="og:title" content="open-project">
+<meta property="og:url" content="https://daydaynobug.me/2024/06/30/open-project/index.html">
+<meta property="og:site_name" content="SCBLOG">
+<meta property="og:description" content="开源项目收集本文档收集一些有意思的开源项目： linenoiselinenoise 是一个轻量级、跨平台的 C 语言库，用于命令行输入的处理。该项目最初是由 Salvatore Sanfilippo (antirez) 创建的，以提供一个简单、高效的替代方案，取代 GNU Readline 和 libedit 库。linenoise 的设计目标是保持最小化的代码库，同时提供足够的功能以满足大多数命">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-06-30T08:14:24.000Z">
+<meta property="article:modified_time" content="2024-06-30T09:52:12.817Z">
+<meta property="article:author" content="black liu">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="SCBLOG" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">black liu</h5>
+          <a href="mailto:liusc0616@gmail.com" title="liusc0616@gmail.com" class="mail">liusc0616@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/DailyNoBug" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">open-project</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">open-project</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2024-06-30T08:14:24.000Z" itemprop="datePublished" class="page-time">
+  2024-06-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开源项目收集"><span class="post-toc-number">1.</span> <span class="post-toc-text">开源项目收集</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#linenoise"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">linenoise</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#特点"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主要功能"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">主要功能</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#taipy"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">taipy</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#特点-1"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#主要组件"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">主要组件</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-open-project"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">open-project</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2024-06-30 16:14:24" datetime="2024-06-30T08:14:24.000Z"  itemprop="datePublished">2024-06-30</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="开源项目收集"><a href="#开源项目收集" class="headerlink" title="开源项目收集"></a>开源项目收集</h1><p>本文档收集一些有意思的开源项目：</p>
+<h2 id="linenoise"><a href="#linenoise" class="headerlink" title="linenoise"></a><a href="https://github.com/antirez/linenoise" target="_blank" rel="noopener">linenoise</a></h2><p>linenoise 是一个轻量级、跨平台的 C 语言库，用于命令行输入的处理。该项目最初是由 Salvatore Sanfilippo (antirez) 创建的，以提供一个简单、高效的替代方案，取代 GNU Readline 和 libedit 库。linenoise 的设计目标是保持最小化的代码库，同时提供足够的功能以满足大多数命令行应用程序的需求。</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
+<li><strong>轻量级</strong>：linenoise 的代码非常简洁，仅包含几个文件，使其易于理解和维护。</li>
+<li><strong>跨平台</strong>：支持多种操作系统，包括 Linux、MacOS 和 Windows。</li>
+<li><strong>无依赖</strong>：不依赖于任何第三方库，仅使用标准 C 库函数。</li>
+<li><strong>Unicode 支持</strong>：能够正确处理多字节字符和 Unicode 字符。</li>
+<li><strong>历史记录管理</strong>：支持命令历史记录，可以方便地浏览和编辑之前输入的命令。</li>
+<li><strong>自动补全</strong>：提供简单的自动补全功能，方便用户快速输入命令。</li>
+</ol>
+<h3 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h3><ul>
+<li><strong>行编辑</strong>：支持基本的行编辑功能，如删除、插入、左右移动光标等。</li>
+<li><strong>历史记录</strong>：可以记录用户输入的历史命令，并在命令行中上下浏览历史记录。</li>
+<li><strong>自动补全</strong>：通过提供回调函数，可以实现命令的自动补全功能。</li>
+<li><strong>多行支持</strong>：能够正确处理和显示多行输入。</li>
+</ul>
+<p>链接：<a href="https://github.com/antirez/linenoise" target="_blank" rel="noopener">https://github.com/antirez/linenoise</a></p>
+<h2 id="taipy"><a href="#taipy" class="headerlink" title="taipy"></a>taipy</h2><p>Taipy 是一个用于创建数据驱动应用程序的 Python 库。它旨在帮助开发者快速构建、部署和管理数据科学应用程序，简化了数据流的构建和用户界面的设计。Taipy 通过一组高效的工具和框架，提供了一种灵活且易于使用的方法来处理复杂的数据科学任务。</p>
+<h3 id="特点-1"><a href="#特点-1" class="headerlink" title="特点"></a>特点</h3><ol>
+<li><strong>易于使用</strong>：提供简洁的 API 和高层次的抽象，使得开发者能够快速上手，减少了编写样板代码的时间。</li>
+<li><strong>灵活性</strong>：允许开发者自定义数据流和用户界面，以满足特定的业务需求。</li>
+<li><strong>可视化</strong>：内置丰富的图表和可视化组件，使得数据展示和交互变得更加直观。</li>
+<li><strong>扩展性</strong>：支持集成第三方库和工具，能够扩展其功能以适应更多的数据科学场景。</li>
+<li><strong>高效性</strong>：优化了数据处理和流管理，确保应用程序在大数据环境下的高效运行。</li>
+</ol>
+<h3 id="主要组件"><a href="#主要组件" class="headerlink" title="主要组件"></a>主要组件</h3><p>Taipy 包含几个关键组件，每个组件都专注于特定的功能领域：</p>
+<ol>
+<li><strong>Taipy Core</strong>：用于定义和管理数据流和任务调度的核心库。它帮助开发者设计数据处理管道，并确保任务按顺序执行。</li>
+<li><strong>Taipy GUI</strong>：用于创建交互式用户界面的工具包。它提供了多种图表和控件，使得数据展示更加生动。</li>
+<li><strong>Taipy Config</strong>：用于配置和管理应用程序设置的模块。它允许开发者灵活地定义和调整应用程序的行为。</li>
+<li><strong>Taipy REST</strong>：用于构建 RESTful API 接口，使得应用程序可以轻松地与其他系统或服务进行通信。</li>
+</ol>
+<p>链接：<a href="https://github.com/Avaiga/taipy" target="_blank" rel="noopener">https://github.com/Avaiga/taipy</a></p>
+<p>不定期更新…</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2024-06-30T09:52:12.817Z" itemprop="dateUpdated">2024-06-30 17:52:12</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2024/06/30/open-project/" target="_blank" rel="external">https://daydaynobug.me/2024/06/30/open-project/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://daydaynobug.me">
+            <img src="/img/avatar.jpeg" alt="black liu">
+            black liu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daydaynobug.me/2024/06/30/open-project/&title=《open-project》 — SCBLOG&pic=https://daydaynobug.me/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daydaynobug.me/2024/06/30/open-project/&title=《open-project》 — SCBLOG&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daydaynobug.me/2024/06/30/open-project/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《open-project》 — SCBLOG&url=https://daydaynobug.me/2024/06/30/open-project/&via=https://daydaynobug.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daydaynobug.me/2024/06/30/open-project/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2024/06/21/autotest-platform/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">autotest-platform</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>black liu &copy; 2015 - 2024</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://daydaynobug.me/2024/06/30/open-project/&title=《open-project》 — SCBLOG&pic=https://daydaynobug.me/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://daydaynobug.me/2024/06/30/open-project/&title=《open-project》 — SCBLOG&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://daydaynobug.me/2024/06/30/open-project/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《open-project》 — SCBLOG&url=https://daydaynobug.me/2024/06/30/open-project/&via=https://daydaynobug.me" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://daydaynobug.me/2024/06/30/open-project/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://daydaynobug.me/2024/06/30/open-project/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Error!';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'daydaynobug';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
