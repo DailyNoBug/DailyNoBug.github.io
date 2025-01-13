@@ -1,4 +1,4 @@
-name: Deploy Hexo
+name: Deploy Hexo to GitHub Pages
 
 on:
   push:
@@ -27,5 +27,6 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.DEPLOY_KEY }}
-        publish_dir: ./public
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
+        publish_branch: gh-pages  # 指定部署的分支
