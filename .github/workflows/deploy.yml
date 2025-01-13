@@ -1,67 +1,31 @@
-name: Deploy Hexo to GitHub Pages
+name: Deploy Hexo
 
 on:
   push:
     branches:
-      - main
-
-env:
-  GIT_USER: DailyNoBug
-  GIT_EMAIL: 2790099263@qq.com
-  THEME_REPO: yscoder/hexo-theme-indigo
-  THEME_BRANCH: master
-  DEPLOY_REPO: DailyNoBug/DailyNoBug.github.io
-  DEPLOY_BRANCH: gh-pages
+      - main  # 监听的分支，根据需要修改
 
 jobs:
-  build:
-    name: Build on node ${{ matrix.node_version }} and ${{ matrix.os }}
+  build-deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node_version: [16.x]
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Checkout theme repo
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ env.THEME_REPO }}
-          ref: ${{ env.THEME_BRANCH }}
-          path: themes/concise
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # 使用的 Node.js 版本
 
-      - name: Checkout deploy repo
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ env.DEPLOY_REPO }}
-          ref: ${{ env.DEPLOY_BRANCH }}
-          path: .deploy_git
+    - name: Install dependencies
+      run: npm install
 
-      - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node_version }}
+    - name: Generate static files
+      run: npx hexo generate
 
-      - name: Configuration environment
-        env:
-          HEXO_DEPLOY_PRI: ${{secrets.DEPLOY_KEY}}
-        run: |
-          sudo timedatectl set-timezone "Asia/Shanghai"
-          mkdir -p ~/.ssh/
-          echo "$HEXO_DEPLOY_PRI" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config --global user.name $GIT_USER
-          git config --global user.email $GIT_EMAIL
-
-      - name: Install dependencies
-        run: |
-          npm install
-
-      - name: Deploy hexo
-        run: |
-          npm run clean
-          npm run deploy
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.DEPLOY_KEY }}
+        publish_dir: ./public
