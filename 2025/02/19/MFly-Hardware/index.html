@@ -20,7 +20,7 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="">
+    <meta name="keywords" content="硬件,四轴">
     <meta name="description" content="飞行器硬件设计本文主要记录飞行器硬件设计的过程,以及一些问题记录. 本飞行器旨在作为一个低成本的实验平台完成相关算法和工程落地实践 飞行器硬件拓扑飞机整体硬件拓扑                                                                                             img               飞控硬件拓扑">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MFly-Hardware">
@@ -34,9 +34,22 @@
 <meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219155216587.png">
 <meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219155533770.png">
 <meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219155554870.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162624.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162719.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162747.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219163109553.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219163351.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164043.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164124.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164653.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164755.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164854.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219162207918.png">
+<meta property="og:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219162328789.png">
 <meta property="article:published_time" content="2025-02-19T10:12:21.000Z">
-<meta property="article:modified_time" content="2025-02-19T08:08:22.991Z">
+<meta property="article:modified_time" content="2025-02-19T08:50:37.197Z">
 <meta property="article:author" content="black liu">
+<meta property="article:tag" content="硬件,四轴">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/%E9%A3%9E%E8%A1%8C%E5%99%A8%E7%BB%93%E6%9E%84%E5%9B%BE.drawio.png">
     
@@ -143,7 +156,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#飞行器硬件设计"><span class="post-toc-number">1.</span> <span class="post-toc-text">飞行器硬件设计</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#飞行器硬件拓扑"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">飞行器硬件拓扑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#飞机整体硬件拓扑"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">飞机整体硬件拓扑</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#飞控硬件拓扑"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">飞控硬件拓扑</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#遥控器硬件拓扑"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">遥控器硬件拓扑</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#飞控SOC域硬件设计"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">飞控SOC域硬件设计</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#核心板部分"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">核心板部分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#电源方案汇总"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">电源方案汇总</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#飞行器硬件设计"><span class="post-toc-number">1.</span> <span class="post-toc-text">飞行器硬件设计</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#飞行器硬件拓扑"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">飞行器硬件拓扑</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#飞机整体硬件拓扑"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">飞机整体硬件拓扑</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#飞控硬件拓扑"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">飞控硬件拓扑</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#遥控器硬件拓扑"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">遥控器硬件拓扑</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#飞控SOC域硬件设计"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">飞控SOC域硬件设计</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#核心板部分"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">核心板部分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#HDMI电路部分"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">HDMI电路部分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#SD卡电路部分"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">SD卡电路部分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RJ45网口模块"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">RJ45网口模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#USB网卡电路"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">USB网卡电路</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#电源方案汇总"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">电源方案汇总</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12V-5V方案"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">12V -&gt; 5V方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文档"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">参考文档</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -194,13 +207,9 @@
             </figure>
 
 <h2 id="飞控SOC域硬件设计"><a href="#飞控SOC域硬件设计" class="headerlink" title="飞控SOC域硬件设计"></a>飞控SOC域硬件设计</h2><h3 id="核心板部分"><a href="#核心板部分" class="headerlink" title="核心板部分"></a>核心板部分</h3><p>核心板部分是使用som-rk3399核心板,如图所示:</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219155216587.png" alt="image-20250219155216587" title="">
-                </div>
-                <div class="image-caption">image-20250219155216587</div>
-            </figure>
+<img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219155216587.png" alt="image-20250219155216587" style="zoom: 50%;" />
+
+<center><p>SOM-RK3399核心板俯视图<p/><center/>
 
 <ul>
 <li><p>SOM-RK3399是友善电子团队设计的一款266-pin金手指形式高性能ARM计算机模块，它采用了瑞芯微64位六核SoC RK3399作为主处理器，标配2GB DDR3内存和16GB闪存，板载2x2 MIMO双天线WiFi模组，尺寸只有69.6x50mm，模块上带有独立的TypeC供电接口，以及USB-C显示接口，无需底板也可以单独使用。</p>
@@ -217,7 +226,77 @@
     <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219155554870.png" width="300"/>
 </center>
 
-<h3 id="电源方案汇总"><a href="#电源方案汇总" class="headerlink" title="电源方案汇总"></a>电源方案汇总</h3>
+<center><p>SOM-RK3399硬件引脚图<p/><center/>
+
+<h3 id="HDMI电路部分"><a href="#HDMI电路部分" class="headerlink" title="HDMI电路部分"></a>HDMI电路部分</h3><p>核心板中引出了HDMI接口的引脚,我们需要在底板上进行实现,其中HDMI引脚电路如图所示:</p>
+<center class="half">
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162624.png" width="400"/>
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162719.png" width="400"/>
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162747.png" width="400"/>
+</center>
+
+<center>
+    <p>
+        底板HDMI原理图
+    </p>
+</center>
+
+<h3 id="SD卡电路部分"><a href="#SD卡电路部分" class="headerlink" title="SD卡电路部分"></a>SD卡电路部分</h3><p>核心板引出了<code>SDMMC0</code>相关引脚,这部分引脚可以画SD卡模块的电路,下面是这部分的原理图:</p>
+<center class="half">
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219163109553.png" alt="image-20250219163109553" width="400"/>
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219163351.png" width="400"/>
+</center>
+
+<center>
+    <p>
+        底板SD卡模块原理图
+    </p>
+</center>
+
+<h3 id="RJ45网口模块"><a href="#RJ45网口模块" class="headerlink" title="RJ45网口模块"></a>RJ45网口模块</h3><p>核心板上有一个PHY芯片,引出以太网引脚,下方为RJ45模块原理图:</p>
+<center>
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164043.png" width="400">
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164124.png" width="400">
+</center>
+
+<center>
+    <p>
+        RJ45模块原理图
+    </p>
+</center>
+
+<h3 id="USB网卡电路"><a href="#USB网卡电路" class="headerlink" title="USB网卡电路"></a>USB网卡电路</h3><p>USB网卡使用的是<code>BL-M8812EU2</code>,打算使用这个芯片作为图传芯片使用,原理图如下,封装使用的是自己画的封装,存在部分小瑕疵,但是并不影响使用:</p>
+<center>
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164653.png" width="400">
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164755.png" width="400">
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164854.png" width="400">
+</center>
+
+<center>
+    <p>USB网卡模块原理图</p>
+</center>
+
+
+
+<h2 id="电源方案汇总"><a href="#电源方案汇总" class="headerlink" title="电源方案汇总"></a>电源方案汇总</h2><h3 id="12V-5V方案"><a href="#12V-5V方案" class="headerlink" title="12V -&gt; 5V方案"></a>12V -&gt; 5V方案</h3><p>使用<strong>MP2236GJ-Z</strong>芯片 <a href="https://www.monolithicpower.com/en/documentview/productdocument/index/version/2/document_type/Datasheet/lang/en/sku/MP2236" target="_blank" rel="noopener">datasheet</a></p>
+<p>主要特点和典型电路如下:</p>
+<img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219162207918.png" alt="image-20250219162207918" style="zoom: 67%;" />
+
+<p>支持3V-18V输入,6A输出,对于此方案下,12V输入,5V输出的要求,绘制原理图如下:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219162328789.png" alt="image-20250219162328789" title="">
+                </div>
+                <div class="image-caption">image-20250219162328789</div>
+            </figure>
+
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
+<li><a href="https://wiki.friendlyelec.com/wiki/index.php/SOM-RK3399/zh" target="_blank" rel="noopener">SOM-RK3399文档</a></li>
+<li><a href="https://www.monolithicpower.com/en/documentview/productdocument/index/version/2/document_type/Datasheet/lang/en/sku/MP2236" target="_blank" rel="noopener">MP2236GJ-Z datasheet</a></li>
+<li></li>
+</ol>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -225,7 +304,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2025-02-19T08:08:22.991Z" itemprop="dateUpdated">2025-02-19 08:08:22</time>
+    Last updated: <time datetime="2025-02-19T08:50:37.197Z" itemprop="dateUpdated">2025-02-19 08:50:37</time>
 </span><br>
 
 
@@ -247,6 +326,8 @@
 
         <div class="post-footer">
             
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6-%E5%9B%9B%E8%BD%B4/" rel="tag">硬件,四轴</a></li></ul>
+
 
             
 <div class="page-share-wrap">
