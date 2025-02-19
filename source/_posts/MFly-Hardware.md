@@ -15,15 +15,15 @@ tags: 硬件,四轴
 
 ### 飞机整体硬件拓扑
 
-![img](https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/%E9%A3%9E%E8%A1%8C%E5%99%A8%E7%BB%93%E6%9E%84%E5%9B%BE.drawio.png)
+<img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/%E9%A3%9E%E8%A1%8C%E5%99%A8%E7%BB%93%E6%9E%84%E5%9B%BE.drawio.png" alt="img" style="zoom: 80%;" />
 
 ### 飞控硬件拓扑
 
-![img](https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/4-1%E9%A3%9E%E6%8E%A7%E7%BB%93%E6%9E%84%E5%9B%BE.drawio.png)
+<img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/4-1%E9%A3%9E%E6%8E%A7%E7%BB%93%E6%9E%84%E5%9B%BE.drawio.png" alt="img" style="zoom:80%;" />
 
 ### 遥控器硬件拓扑
 
-![img](https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/%E9%81%A5%E6%8E%A7%E5%99%A8%E7%BB%93%E6%9E%84.drawio.png)
+<img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/%E9%81%A5%E6%8E%A7%E5%99%A8%E7%BB%93%E6%9E%84.drawio.png" alt="img" style="zoom:80%;" />
 
 ## 飞控SOC域硬件设计
 
@@ -59,9 +59,9 @@ tags: 硬件,四轴
 核心板中引出了HDMI接口的引脚,我们需要在底板上进行实现,其中HDMI引脚电路如图所示:
 
 <center class="half">
-    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162624.png" width="400"/>
-    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162719.png" width="400"/>
-    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162747.png" width="400"/>
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162624.png" width="300"/>
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162719.png" width="300"/>
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219162747.png" width="300"/>
 </center>
 
 <center>
@@ -75,8 +75,8 @@ tags: 硬件,四轴
 核心板引出了`SDMMC0`相关引脚,这部分引脚可以画SD卡模块的电路,下面是这部分的原理图:
 
 <center class="half">
-    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219163109553.png" alt="image-20250219163109553" width="400"/>
-    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219163351.png" width="400"/>
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219163109553.png" alt="image-20250219163109553" width="300"/>
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219163351.png" width="300"/>
 </center>
 
 <center>
@@ -90,8 +90,8 @@ tags: 硬件,四轴
 核心板上有一个PHY芯片,引出以太网引脚,下方为RJ45模块原理图:
 
 <center>
-    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164043.png" width="400">
-    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164124.png" width="400">
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164043.png" width="300">
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164124.png" width="300">
 </center>
 
 <center>
@@ -105,9 +105,9 @@ tags: 硬件,四轴
 USB网卡使用的是`BL-M8812EU2`,打算使用这个芯片作为图传芯片使用,原理图如下,封装使用的是自己画的封装,存在部分小瑕疵,但是并不影响使用:
 
 <center>
-    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164653.png" width="400">
-    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164755.png" width="400">
-    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164854.png" width="400">
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164653.png" width="300">
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164755.png" width="300">
+    <img src="https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/20250219164854.png" width="300">
 </center>
 
 <center>
@@ -128,7 +128,7 @@ USB网卡使用的是`BL-M8812EU2`,打算使用这个芯片作为图传芯片使
 
 支持3V-18V输入,6A输出,对于此方案下,12V输入,5V输出的要求,绘制原理图如下:
 
-![image-20250219162328789](https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219162328789.png)
+![](https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219162328789.png)
 
 ## 参考文档
 
