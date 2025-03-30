@@ -115,8 +115,9 @@ USB网卡使用的是`BL-M8812EU2`,打算使用这个芯片作为图传芯片使
 </center>
 
 
-
 ## 电源方案汇总
+
+**注意电阻选择上，有些数值在绘制的时候需要使用叠加来凑数**
 
 ### 12V -> 5V方案
 
@@ -130,8 +131,41 @@ USB网卡使用的是`BL-M8812EU2`,打算使用这个芯片作为图传芯片使
 
 ![](https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250219162328789.png)
 
+### 12V -> 3.3V方案
+
+依旧使用**MP2236GJ-Z**芯片 [datasheet](https://www.monolithicpower.com/en/documentview/productdocument/index/version/2/document_type/Datasheet/lang/en/sku/MP2236)设计方案同上，但是在buck电阻上存在数据差别
+
+## 飞控传感器部分
+
+### 气压计ICP-20100
+
+datasheet中的典型电路：
+
+![image-20250226201805401](https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250226201805401.png)
+
+## 飞控外设分配
+
+![image-20250227202626796](https://tuchuang-e682.obs.cn-north-1.myhuaweicloud.com/image-20250227202626796.png)
+
 ## 参考文档
 
 1. [SOM-RK3399文档](https://wiki.friendlyelec.com/wiki/index.php/SOM-RK3399/zh)
 2. [MP2236GJ-Z datasheet](https://www.monolithicpower.com/en/documentview/productdocument/index/version/2/document_type/Datasheet/lang/en/sku/MP2236)
 3. 
+
+## 附录1 芯片选择部分
+
+芯片选型原则：
+
+1. 有完整的芯片数据手册，有参考设计方案
+2. 最好有相应的封装库进行设计，但是如果使用lceda进行设计需要审核一下使用的封装是否正确
+3. 选择可以在电商平台买到的芯片进行设计
+
+## 附录2 打板前CheckList
+
+| 检查项                     | 是否完成 | 备注 |
+| -------------------------- | -------- | ---- |
+| 电源电阻是否已经完成凑数   | - [ ]    |      |
+| 图传网卡需要独立出一块小板 | - [ ]    |      |
+| MIPI屏幕在第一版上暂时取消 | - [ ]    |      |
+
