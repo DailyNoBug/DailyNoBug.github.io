@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>INAV_NxtPx4 | SCBLOG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="硬件,四轴">
+    <meta name="description" content="INAV_NxtPx4为基于STM32H743VIH6主控的新飞控板适配INAV固件，需要结合硬件设计与INAV固件的开发框架进行定制化配置。以下是适配的核心步骤及注意事项：  一、开发环境搭建 获取INAV源码从GitHub克隆INAV仓库，切换到支持H7系列的最新分支（如INAV 8.0及以上版本）。   1git clone https:&#x2F;&#x2F;github.com&#x2F;INAVFlight&#x2F;ina">
+<meta property="og:type" content="article">
+<meta property="og:title" content="INAV_NxtPx4">
+<meta property="og:url" content="https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/index.html">
+<meta property="og:site_name" content="SCBLOG">
+<meta property="og:description" content="INAV_NxtPx4为基于STM32H743VIH6主控的新飞控板适配INAV固件，需要结合硬件设计与INAV固件的开发框架进行定制化配置。以下是适配的核心步骤及注意事项：  一、开发环境搭建 获取INAV源码从GitHub克隆INAV仓库，切换到支持H7系列的最新分支（如INAV 8.0及以上版本）。   1git clone https:&#x2F;&#x2F;github.com&#x2F;INAVFlight&#x2F;ina">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-14T17:12:21.000Z">
+<meta property="article:modified_time" content="2025-04-14T14:25:19.204Z">
+<meta property="article:author" content="black liu">
+<meta property="article:tag" content="硬件,四轴">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="SCBLOG" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">black liu</h5>
+          <a href="mailto:liusc0616@gmail.com" title="liusc0616@gmail.com" class="mail">liusc0616@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/DailyNoBug" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">INAV_NxtPx4</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">INAV_NxtPx4</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2025-04-14T17:12:21.000Z" itemprop="datePublished" class="page-time">
+  2025-04-14
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#INAV-NxtPx4"><span class="post-toc-number">1.</span> <span class="post-toc-text">INAV_NxtPx4</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、开发环境搭建"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">一、开发环境搭建</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、硬件描述文件配置"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">二、硬件描述文件配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、固件编译与烧录"><span class="post-toc-number">1.0.3.</span> <span class="post-toc-text">三、固件编译与烧录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、地面站调试与验证"><span class="post-toc-number">1.0.4.</span> <span class="post-toc-text">四、地面站调试与验证</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、常见问题与优化"><span class="post-toc-number">1.0.5.</span> <span class="post-toc-text">五、常见问题与优化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考案例"><span class="post-toc-number">1.0.6.</span> <span class="post-toc-text">参考案例</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-INAV_NxtPX4"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">INAV_NxtPx4</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2025-04-14 17:12:21" datetime="2025-04-14T17:12:21.000Z"  itemprop="datePublished">2025-04-14</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="INAV-NxtPx4"><a href="#INAV-NxtPx4" class="headerlink" title="INAV_NxtPx4"></a>INAV_NxtPx4</h1><p>为基于STM32H743VIH6主控的新飞控板适配INAV固件，需要结合硬件设计与INAV固件的开发框架进行定制化配置。以下是适配的核心步骤及注意事项：</p>
+<hr>
+<h3 id="一、开发环境搭建"><a href="#一、开发环境搭建" class="headerlink" title="一、开发环境搭建"></a><strong>一、开发环境搭建</strong></h3><ol>
+<li><p><strong>获取INAV源码</strong><br>从GitHub克隆INAV仓库，切换到支持H7系列的最新分支（如INAV 8.0及以上版本）。  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/INAVFlight/inav.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置工具链</strong><br>安装ARM GCC编译工具链（如<code>gcc-arm-none-eabi</code>），并确保CMake版本兼容。H743需支持STM32H7系列的编译配置。</p>
+</li>
+</ol>
+<hr>
+<h3 id="二、硬件描述文件配置"><a href="#二、硬件描述文件配置" class="headerlink" title="二、硬件描述文件配置"></a><strong>二、硬件描述文件配置</strong></h3><p>INAV通过<code>target</code>目录下的硬件描述文件定义飞控板的资源分配，需基于现有类似型号（如MATEKF405或官方支持的H743型号）进行修改：  </p>
+<ol>
+<li><p><strong>创建新目标目录</strong><br>在<code>src/main/target</code>下新建目录（如<code>CUSTOM_H743</code>），复制相近型号的配置文件（如<code>target.h</code>、<code>target.c</code>、<code>CMakeLists.txt</code>）。</p>
+</li>
+<li><p><strong>主控芯片定义</strong><br>在<code>CMakeLists.txt</code>中指定主控型号，例如：  </p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">target_stm32h743xx(CUSTOM_H743)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>引脚与外设映射</strong>  </p>
+<ul>
+<li><strong>LED与蜂鸣器</strong>：定义状态指示灯和蜂鸣器引脚。  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LED0 PC13</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BEEPER PB8</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>SPI&#x2F;I2C总线</strong>：配置传感器接口。例如双IMU（如BMI270、ICM-42688）需指定SPI总线及片选引脚：  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> USE_SPI_DEVICE_1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SPI1_SCK_PIN PA5</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BMI270_CS_PIN PC2</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>UART接口</strong>：映射串口功能（GPS、接收机、图传等）。例如：  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> USE_UART3</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> UART3_RX_PIN PC11  <span class="comment">// GPS接口</span></span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>传感器配置</strong>  </p>
+<ul>
+<li><strong>陀螺仪与加速度计</strong>：启用并指定型号及校准方向（如<code>IMU_BMI270_ALIGN CW0_DEG</code>）。  </li>
+<li><strong>气压计与磁力计</strong>：若使用DPS310或IST8310，需启用对应驱动并指定I2C总线。  </li>
+<li><strong>OSD与TF卡</strong>：配置AT7456E OSD芯片及SD卡接口（若支持）。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="三、固件编译与烧录"><a href="#三、固件编译与烧录" class="headerlink" title="三、固件编译与烧录"></a><strong>三、固件编译与烧录</strong></h3><ol>
+<li><p><strong>编译命令</strong><br>使用CMake生成编译配置，指定目标名称：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make CUSTOM_H743</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>烧录固件</strong>  </p>
+<ul>
+<li><strong>DFU模式</strong>：按住BOOT按钮连接USB，使用地面站（如INAV Configurator）或<code>dfu-util</code>工具烧录。  </li>
+<li><strong>SWD调试</strong>：通过ST-Link或J-Link直接烧录（需配置<code>USE_SWD</code>）。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="四、地面站调试与验证"><a href="#四、地面站调试与验证" class="headerlink" title="四、地面站调试与验证"></a><strong>四、地面站调试与验证</strong></h3><ol>
+<li><p><strong>连接与初始化</strong><br>使用INAV Configurator连接飞控，检查传感器数据（陀螺仪、加速度计、气压计）是否正常显示。</p>
+</li>
+<li><p><strong>功能配置</strong>  </p>
+<ul>
+<li><strong>接收机协议</strong>：在CLI中设置<code>serialrx_provider</code>（如SBUS、CRSF）。  </li>
+<li><strong>电机输出</strong>：配置PWM&#x2F;DShot协议及电机映射顺序。  </li>
+<li><strong>OSD叠加</strong>：启用并调整显示内容（如电压、飞行模式）。</li>
+</ul>
+</li>
+<li><p><strong>校准与测试</strong>  </p>
+<ul>
+<li><strong>传感器校准</strong>：执行加速度计、陀螺仪、磁力计校准。  </li>
+<li><strong>电机测试</strong>：通过地面站逐步测试各电机响应，确保无冲突。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="五、常见问题与优化"><a href="#五、常见问题与优化" class="headerlink" title="五、常见问题与优化"></a><strong>五、常见问题与优化</strong></h3><ol>
+<li><p><strong>驱动缺失</strong><br>若电脑无法识别飞控，需安装STM32 VCP驱动（如<code>stm32cubeprog</code>包含的驱动）。</p>
+</li>
+<li><p><strong>硬件冲突</strong>  </p>
+<ul>
+<li><strong>电源干扰</strong>：确保传感器（如IMU）独立供电以减少噪声。  </li>
+<li><strong>引脚复用</strong>：避免UART与SPI&#x2F;I2C引脚冲突（参考芯片数据手册）。</li>
+</ul>
+</li>
+<li><p><strong>性能优化</strong>  </p>
+<ul>
+<li><strong>DMA配置</strong>：为高频外设（如陀螺仪SPI）启用DMA以降低CPU负载。  </li>
+<li><strong>时钟分配</strong>：优化STM32H7的时钟树，确保外设时钟与主频匹配。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="参考案例"><a href="#参考案例" class="headerlink" title="参考案例"></a><strong>参考案例</strong></h3><ul>
+<li><strong>MicoAir743飞控</strong>：支持INAV 8.0+，其硬件描述文件可直接参考（如UART映射、传感器配置）。  </li>
+<li><strong>星火计划H743飞控</strong>：采用双IMU设计，需在<code>target.h</code>中分别定义两个陀螺仪的SPI总线及校准参数。</li>
+</ul>
+<p>通过以上步骤，结合硬件特性调整配置文件，即可完成INAV对STM32H743VIH6飞控板的适配。开发过程中建议参考官方文档及社区案例以解决具体问题。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2025-04-14T14:25:19.204Z" itemprop="dateUpdated">2025-04-14 14:25:19</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2025/04/14/INAV_NxtPX4/" target="_blank" rel="external">https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://dailynobug.github.io">
+            <img src="/img/avatar.jpeg" alt="black liu">
+            black liu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A1%AC%E4%BB%B6-%E5%9B%9B%E8%BD%B4/" rel="tag">硬件,四轴</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/&title=《INAV_NxtPx4》 — SCBLOG&pic=https://dailynobug.github.io/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/&title=《INAV_NxtPx4》 — SCBLOG&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《INAV_NxtPx4》 — SCBLOG&url=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/&via=https://dailynobug.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2025/04/14/mipi_csi_imx415/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">mipi_csi_imx415</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>black liu &copy; 2021 - 2025</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/&title=《INAV_NxtPx4》 — SCBLOG&pic=https://dailynobug.github.io/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/&title=《INAV_NxtPx4》 — SCBLOG&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《INAV_NxtPx4》 — SCBLOG&url=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/&via=https://dailynobug.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://dailynobug.github.io/2025/04/14/INAV_NxtPX4/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Error!';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'daydaynobug';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
