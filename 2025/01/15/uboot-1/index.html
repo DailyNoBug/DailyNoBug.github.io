@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>uboot-1 | SCBLOG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="UBOOT 学习笔记执行流程1. 上电与ROM代码执行 上电后，ROM代码（BootROM）启动：这是存储在SoC中的固件，负责引导过程的第一阶段。它会从预定义的启动设备（如eMMC、SD卡、SPI Flash等）加载引导程序。  2. 第一阶段引导加载器（SPL） SPL（Secondary Program Loader）：通常是U-Boot的一个精简版本，负责初始化基本的硬件（如DDR内存），">
+<meta property="og:type" content="article">
+<meta property="og:title" content="uboot-1">
+<meta property="og:url" content="https://dailynobug.github.io/2025/01/15/uboot-1/index.html">
+<meta property="og:site_name" content="SCBLOG">
+<meta property="og:description" content="UBOOT 学习笔记执行流程1. 上电与ROM代码执行 上电后，ROM代码（BootROM）启动：这是存储在SoC中的固件，负责引导过程的第一阶段。它会从预定义的启动设备（如eMMC、SD卡、SPI Flash等）加载引导程序。  2. 第一阶段引导加载器（SPL） SPL（Secondary Program Loader）：通常是U-Boot的一个精简版本，负责初始化基本的硬件（如DDR内存），">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-01-15T11:11:51.000Z">
+<meta property="article:modified_time" content="2025-04-15T02:23:17.326Z">
+<meta property="article:author" content="black liu">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="SCBLOG" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpeg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">black liu</h5>
+          <a href="mailto:liusc0616@gmail.com" title="liusc0616@gmail.com" class="mail">liusc0616@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/DailyNoBug" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">uboot-1</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">uboot-1</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2025-01-15T11:11:51.000Z" itemprop="datePublished" class="page-time">
+  2025-01-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#UBOOT-学习笔记"><span class="post-toc-number">1.</span> <span class="post-toc-text">UBOOT 学习笔记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#执行流程"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">执行流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-上电与ROM代码执行"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1. 上电与ROM代码执行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-第一阶段引导加载器（SPL）"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">2. 第一阶段引导加载器（SPL）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-U-Boot执行"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">3. U-Boot执行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-启动Linux内核"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">4. 启动Linux内核</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-用户空间启动"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">5. 用户空间启动</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-uboot-1"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">uboot-1</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2025-01-15 11:11:51" datetime="2025-01-15T11:11:51.000Z"  itemprop="datePublished">2025-01-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="UBOOT-学习笔记"><a href="#UBOOT-学习笔记" class="headerlink" title="UBOOT 学习笔记"></a>UBOOT 学习笔记</h1><h2 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h2><h3 id="1-上电与ROM代码执行"><a href="#1-上电与ROM代码执行" class="headerlink" title="1. 上电与ROM代码执行"></a>1. 上电与ROM代码执行</h3><ul>
+<li><strong>上电后，ROM代码（BootROM）启动</strong>：这是存储在SoC中的固件，负责引导过程的第一阶段。它会从预定义的启动设备（如eMMC、SD卡、SPI Flash等）加载引导程序。</li>
+</ul>
+<h3 id="2-第一阶段引导加载器（SPL）"><a href="#2-第一阶段引导加载器（SPL）" class="headerlink" title="2. 第一阶段引导加载器（SPL）"></a>2. 第一阶段引导加载器（SPL）</h3><ul>
+<li><strong>SPL（Secondary Program Loader）</strong>：通常是U-Boot的一个精简版本，负责初始化基本的硬件（如DDR内存），并加载U-Boot的完整版本。</li>
+<li><strong>加载并执行U-Boot</strong>：SPL将U-Boot从存储设备加载到内存中，然后跳转到U-Boot的入口点。</li>
+</ul>
+<h3 id="3-U-Boot执行"><a href="#3-U-Boot执行" class="headerlink" title="3. U-Boot执行"></a>3. U-Boot执行</h3><ul>
+<li><strong>硬件初始化</strong>：U-Boot完成更多的硬件初始化，包括设置时钟、初始化串口、配置网络等。</li>
+<li><strong>设备树加载</strong>：加载设备树文件（DTB），这描述了硬件的配置和连接。</li>
+<li><strong>选择引导源</strong>：根据环境变量或默认配置，选择从哪个设备加载操作系统内核（如eMMC、SD卡、网络等）。</li>
+<li><strong>加载内核和initrd</strong>：将Linux内核和初始RAM盘（initrd&#x2F;initramfs）加载到内存中。</li>
+<li><strong>设置内核参数</strong>：通过命令行参数向内核传递必要的信息（如根文件系统的位置）。</li>
+</ul>
+<h3 id="4-启动Linux内核"><a href="#4-启动Linux内核" class="headerlink" title="4. 启动Linux内核"></a>4. 启动Linux内核</h3><ul>
+<li><strong>跳转到内核入口</strong>：U-Boot将控制权交给Linux内核，内核开始执行。</li>
+<li><strong>内核初始化</strong>：Linux内核进行硬件检测和初始化，加载必要的驱动程序，并挂载根文件系统。</li>
+</ul>
+<h3 id="5-用户空间启动"><a href="#5-用户空间启动" class="headerlink" title="5. 用户空间启动"></a>5. 用户空间启动</h3><ul>
+<li><strong>init进程启动</strong>：内核启动第一个用户空间进程（通常是<code>/sbin/init</code>），这开始了用户空间的初始化。</li>
+<li><strong>启动服务和登录界面</strong>：根据系统配置，启动各种系统服务和提供用户登录界面。</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2025-04-15T02:23:17.326Z" itemprop="dateUpdated">2025-04-15 02:23:17</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2025/01/15/uboot-1/" target="_blank" rel="external">https://dailynobug.github.io/2025/01/15/uboot-1/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://dailynobug.github.io">
+            <img src="/img/avatar.jpeg" alt="black liu">
+            black liu
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://dailynobug.github.io/2025/01/15/uboot-1/&title=《uboot-1》 — SCBLOG&pic=https://dailynobug.github.io/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dailynobug.github.io/2025/01/15/uboot-1/&title=《uboot-1》 — SCBLOG&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://dailynobug.github.io/2025/01/15/uboot-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《uboot-1》 — SCBLOG&url=https://dailynobug.github.io/2025/01/15/uboot-1/&via=https://dailynobug.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://dailynobug.github.io/2025/01/15/uboot-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2025/01/15/run-ollama-in-docker/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">run-ollama-in-docker</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2024/06/30/open-project/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">open-project</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license noopener" href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>black liu &copy; 2021 - 2025</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://dailynobug.github.io/2025/01/15/uboot-1/&title=《uboot-1》 — SCBLOG&pic=https://dailynobug.github.io/img/avatar.jpeg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://dailynobug.github.io/2025/01/15/uboot-1/&title=《uboot-1》 — SCBLOG&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://dailynobug.github.io/2025/01/15/uboot-1/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《uboot-1》 — SCBLOG&url=https://dailynobug.github.io/2025/01/15/uboot-1/&via=https://dailynobug.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://dailynobug.github.io/2025/01/15/uboot-1/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=https://dailynobug.github.io/2025/01/15/uboot-1/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = 'Error!';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'daydaynobug';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
