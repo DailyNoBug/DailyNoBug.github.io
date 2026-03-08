@@ -1,3 +1,12 @@
+---
+title: source/_posts/mipi_csi_imx415
+date: 2026-03-01T19:32
+tags: []
+categories: []
+draft: false
+slug: source_postsmipi_csi_imx415
+---
+
 # 泰山派移植IMX415摄像头
 
 ## CMOS摄像头整体的数据流向
